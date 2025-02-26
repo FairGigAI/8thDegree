@@ -47,7 +47,6 @@ FairGigAI is licensed under the **GPL-3.0 License**, ensuring transparency and c
 
 🔗 **Follow & Contribute:**
 - **GitHub Repository:** [github.com/FairGigAI](#)
-- **Website:** [FairGig.ai](#) (Coming Soon)
 - **Community Forum:** [Join the Discussion](#)
 
 🚀 **Let’s build the future of freelancing together!**
