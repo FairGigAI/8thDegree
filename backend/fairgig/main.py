@@ -1,12 +1,14 @@
-from fastapi import FastAPI
-from fairgig.routers import user, job
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from sqlalchemy.sql import text  # Import text() for raw SQL
+from fairgig.database import get_db
 
 app = FastAPI()
 
-# Include API routes
-app.include_router(user.router)
-app.include_router(job.router)
-
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to FairGigAI"}
+@app.get("/test-db")
+def test_db_connection(db: Session = Depends(get_db)):
+    try:
+        db.execute(text("SELECT 1"))  # Use text() for raw SQL
+        return {"message": "Database connection successful!"}
+    except Exception as e:
+        return {"error": str(e)}
