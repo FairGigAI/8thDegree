@@ -18,3 +18,17 @@
 - Set up project structure with FastAPI
 - Added basic `GET` endpoints for users and jobs
 
+## Upodates 2/28/25
+### Added or updated 
+- 8thDegree renamed Repo
+- hosting
+- domain
+- security 
+- FastAPI
+- Frontend
+- backend
+- updated .md files for 
+    - README.md
+    - CONTRIBUTING.md
+    - CODE_OF_CONDUCT.md
+

@@ -1,55 +1,71 @@
-# FairGigAI
-Tired of trying to buy your way to a job on other Freelance and Gig sites? Sick of no one having a support contact? Fead up with random rules about how you can contact each other, or how you can get paid, then forcing you to get paid on their site so you lose 15-25% of your earnings to a platform that already charged you to bid, and charged you to search and charged you to rank up? Don't want to pay your way to getting promoted? 
+# 8thDegree
 
-Yeah, Me Too!
+Tired of restrictive gig platforms that charge high fees, enforce complex bidding systems, and limit opportunities? Sick of unnecessary gatekeeping, pay-to-play ranking, and a lack of real connections between freelancers and clients?
 
-## The Open-Source, Fair Freelance Marketplace
-FairGigAI is a **transparent, open-source** freelance platform designed to connect **freelancers and clients** without restrictive fees, complex bidding systems, or unfair rules. Unlike traditional marketplaces, FairGigAI offers **simple, unlimited** job postings and applications through a straightforward subscription model.
+We were too.
 
-## Why FairGigAI?
-Traditional freelance platforms have become overly restrictive, charging **high fees, enforcing unnecessary bidding wars, and limiting opportunities** for both freelancers and clients. FairGigAI aims to **disrupt the industry** by offering:
+## The Open-Source, Fair Freelance & Talent Connection Platform
+
+8thDegree is a **transparent, open-source** platform designed to connect **freelancers and clients** without restrictive fees, complex bidding wars, or unfair policies. Inspired by the concept of **6 degrees of separation**, we recognize that with today's **AI, search, and algorithms**, anyone can be connected within just **8 digital touches**.
+
+8thDegree isn't just about finding work; it's about **connecting talent, ideas, projects, and personalities** in a way that makes sense.
+
+## Why 8thDegree?
+
+Traditional freelance marketplaces have become restrictive, expensive, and inefficient. 8thDegree disrupts the industry by offering:
 
 - ✅ **Flat-Rate Subscription Model** – No commissions, just one simple monthly fee.
 - ✅ **Unlimited Job Posts & Applications** – No pay-per-bid nonsense.
-- ✅ **Open-Source & Community-Driven** – Built transparently, with contributions from developers worldwide.
-- ✅ **Direct Client-Freelancer Communication** – No gatekeeping or hidden restrictions.
-- ✅ **Fair & Ethical Hiring** – No arbitrary rules, just opportunity.
+- ✅ **AI-Powered Matching & Connections** – Work smarter, not harder.
+- ✅ **Open-Source & Community-Driven** – Built transparently with global contributions.
+- ✅ **Direct Client-Freelancer Communication** – No unnecessary restrictions or gatekeeping.
+- ✅ **Fair & Ethical Hiring** – A platform built on **opportunity, not exploitation**.
 
 ## Core Features (MVP)
-FairGigAI will start with the following core features:
 
-- **Freelancer & Client Profiles** – Simple, professional profiles with relevant skills and experience.
+8thDegree will start with the following core features:
+
+- **Freelancer & Client Profiles** – Professional, skill-based profiles.
 - **Job Posting & Applications** – Clients post jobs, freelancers apply with ease.
 - **Direct Messaging** – Secure and straightforward communication.
 - **Subscription-Based Model** – No bidding, no hidden costs.
-- **Rating & Review System** – Up Vote/Down vote talent and clients, to ensure quality engagements.
+- **AI-Powered Recommendations** – Talent & project matching based on **skills, experience, and personality**.
+- **Dynamic Connection Mapping** – Inspired by **Obsidian's knowledge network**, evolving beyond simple upvote/downvote systems.
 
 ## Tech Stack
+
 - **Backend:** Python (FastAPI)
 - **Database:** PostgreSQL
-- **Frontend:** React or Vue.js (TBD)
+- **Frontend:** Node.js
 - **Authentication:** OAuth2 (Google/GitHub login) or JWT
-- **Hosting:** DigitalOcean / AWS / Vercel
+- **Hosting:** AWS
 
-## 🛠️ Getting Started
-To run FairGigAI locally:
+## Getting Started
+
+To run 8thDegree locally:
+
 ```sh
 # Clone the repository
-git clone https://github.com/FairGigAI/fairgig-platform.git
-cd fairgig-platform/backend
+git clone https://github.com/FairGigAI/8thDegree.git
+cd 8thDegree/backend
 
 # Activate virtual environment
 source venv/bin/activate  # (Mac/Linux) or venv\Scripts\activate (Windows)
 
 # Run FastAPI
-uvicorn fairgig.main:app --reload
+uvicorn app.main:app --reload
 ```
 - Open [`http://127.0.0.1:8000/docs`](http://127.0.0.1:8000/docs) to explore the API.
 
-## 🔮 Roadmap
+## Roadmap
+- Backend setup and progressing
 - Initial API setup with FastAPI
-- PostgreSQL database integration (WIP)
+- PostgreSQL database integration
+- Security Auth
+- Ai-powered job & freelancer matching (WIP)
 - OAuth2 & JWT authentication (Coming Soon)
+- Connection and mapping (Coming Soon)
+- Stable landing page, with Roadmap (Coming Soon)
 
 
 ## Open Source & Contributions

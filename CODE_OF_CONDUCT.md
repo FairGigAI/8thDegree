@@ -1,7 +1,7 @@
 # Contributor Code of Conduct
 
 ## **Our Commitment**
-FairGigAI is dedicated to creating an inclusive and respectful environment for all contributors. We value diversity and strive to provide a harassment-free experience for everyone.
+8thDegree is dedicated to creating an inclusive and respectful environment for all contributors. We value diversity and strive to provide a harassment-free experience for everyone.
 
 ## **Expected Behavior**
 - Be **respectful** to all contributors, maintainers, and community members.
@@ -25,7 +25,7 @@ Violations of this Code of Conduct may result in:
 - **Removal of contributions** violating community standards.
 
 ## **Acknowledgment**
-By contributing to FairGigAI, you agree to uphold this Code of Conduct and foster a positive and collaborative community.
+By contributing to 8thDegree, you agree to uphold this Code of Conduct and foster a positive and collaborative community.
 
 ---
 
