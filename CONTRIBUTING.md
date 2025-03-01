@@ -1,13 +1,14 @@
-# Contributing to FairGigAI
+# Contributing to 8thDegree
 
-Thank you for considering contributing to FairGigAI! We welcome contributions from the community and appreciate your help in building a fair and open freelance marketplace.
+Thank you for considering contributing to 8thDegree! We welcome contributions from the community and appreciate your help in building a **fair and open** talent connection platform.
 
 ## 🚀 How to Contribute
 1. **Fork the Repository**: Click the "Fork" button to create a copy of this repo under your GitHub account.
 2. **Clone Your Fork**: Clone your forked repo to your local machine:
    ```sh
-   git clone https://github.com/YOUR-USERNAME/fairgig-platform.git
-   cd fairgig-platform
+   git clone https://github.com/YOUR-USERNAME/8thDegree.git
+   cd 8thDegree
+
    ```
 3. **Create a Branch**: Follow the branching guidelines before making changes:
    ```sh
@@ -35,7 +36,7 @@ Thank you for considering contributing to FairGigAI! We welcome contributions fr
 - Ensure code changes **do not break existing functionality**.
 
 ## 🔥 Submitting Issues
-If you find a bug or have a feature request, please [open an issue](https://github.com/FairGigAI/fairgig-platform/issues) with:
+If you find a bug or have a feature request, please [open an issue](https://github.com/FairGigAI/8thDegree/issues) with:
 - A **clear title** and description.
 - Steps to **reproduce the issue** (if applicable).
 - Any relevant **logs, screenshots, or context**.
