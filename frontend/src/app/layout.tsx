@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar"; // Import the Navbar component
+import Navbar from "@/components/Navbar"; // Navbar import
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,23 +16,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "FairGigAI",
-  description: "Fair Gig AI Platform",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar /> {/* Render the Navbar here */}
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+          <SessionProvider>
+            <Navbar />
+            {children}
+          </SessionProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
