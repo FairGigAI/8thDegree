@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "fairgig"
+version = "0.1.0"
+description = "Backend for the 8thDegree platform"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.0"
+uvicorn = "^0.27.0"
+sqlalchemy = "^2.0.25"
+alembic = "^1.13.1"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.6"
+psycopg2-binary = "^2.9.9"
+pydantic = {extras = ["email"], version = "^2.5.3"}
+pydantic-settings = "^2.1.0"
+python-dotenv = "^1.0.0"
+httpx = "^0.26.0"
+redis = "^5.0.1"
+slowapi = "^0.1.8"
+sendgrid = "^6.11.0"
+email-validator = "^2.1.0.post1"
+cryptography = "^42.0.2"
+structlog = "^24.1.0"
+sentry-sdk = {extras = ["fastapi"], version = "^1.40.6"}
+prometheus-client = "^0.20.0"
+tenacity = "^8.2.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+pytest-asyncio = "^0.23.3"
+pytest-cov = "^4.1.0"
+black = "^24.1.1"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3 
