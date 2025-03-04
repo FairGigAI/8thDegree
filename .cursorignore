@@ -1,0 +1,34 @@
+# Ignore all environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*
+
+# Ignore credentials & secrets
+*.pem
+*.key
+*.crt
+*.p12
+config/secrets.yml
+keys/
+
+# Ignore build & dependency files
+node_modules/
+dist/
+.idea/
+__pycache__/
+
+# Ignore VS Code cache files but allow settings
+.vscode/*.db
+.vscode/*.cache
+.vscode/*.history
+.vscode/*.log
+
+
+# Ignore logs & temporary files
+logs/
+*.log
+*.tmp
+.DS_Store
