@@ -1,13 +1,48 @@
-# Byte-compiled / optimized / DLL files
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+/coverage/
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build/
+/dist/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -20,9 +55,35 @@ parts/
 sdist/
 var/
 wheels/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environment
+venv/
+.env/
+.venv/
+ENV/
+
+# Docker
+.docker/
+
+# Logs
+logs/
+*.log
+
+# Byte-compiled / optimized / DLL files
+*.manifest
+*.spec
+
+# C extensions
+*.mo
+*.pot
+
+# Distribution / packaging
 *.egg
 MANIFEST
 
@@ -37,18 +98,9 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
 cover/
 
 # Translations
@@ -56,7 +108,6 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -171,3 +222,8 @@ cython_debug/
 .pypirc
 backend/.env
 frontend/.env.local
+
+#SMTP ignore 
+sendgrid.env
+
+
