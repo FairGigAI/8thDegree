@@ -1,95 +1,160 @@
 # 8thDegree
 
-Tired of restrictive gig platforms that charge high fees, enforce complex bidding systems, and limit opportunities? Sick of unnecessary gatekeeping, pay-to-play ranking, and a lack of real connections between freelancers and clients?
+8thDegree is an open-source, fair freelance marketplace platform built with FastAPI and Next.js. It connects freelancers with clients while ensuring fair practices and transparent pricing.
 
-We were too.
+## Features
 
-## The Open-Source, Fair Freelance & Talent Connection Platform
-
-8thDegree is a **transparent, open-source** platform designed to connect **freelancers and clients** without restrictive fees, complex bidding wars, or unfair policies. Inspired by the concept of **6 degrees of separation**, we recognize that with today's **AI, search, and algorithms**, anyone can be connected within just **8 digital touches**.
-
-8thDegree isn't just about finding work; it's about **connecting talent, ideas, projects, and personalities** in a way that makes sense.
-
-## Why 8thDegree?
-
-Traditional freelance marketplaces have become restrictive, expensive, and inefficient. 8thDegree disrupts the industry by offering:
-
-- ✅ **Flat-Rate Subscription Model** – No commissions, just one simple monthly fee.
-- ✅ **Unlimited Job Posts & Applications** – No pay-per-bid nonsense.
-- ✅ **AI-Powered Matching & Connections** – Work smarter, not harder.
-- ✅ **Open-Source & Community-Driven** – Built transparently with global contributions.
-- ✅ **Direct Client-Freelancer Communication** – No unnecessary restrictions or gatekeeping.
-- ✅ **Fair & Ethical Hiring** – A platform built on **opportunity, not exploitation**.
-
-## Core Features (MVP)
-
-8thDegree will start with the following core features:
-
-- **Freelancer & Client Profiles** – Professional, skill-based profiles.
-- **Job Posting & Applications** – Clients post jobs, freelancers apply with ease.
-- **Direct Messaging** – Secure and straightforward communication.
-- **Subscription-Based Model** – No bidding, no hidden costs.
-- **AI-Powered Recommendations** – Talent & project matching based on **skills, experience, and personality**.
-- **Dynamic Connection Mapping** – Inspired by **Obsidian's knowledge network**, evolving beyond simple upvote/downvote systems.
+- Secure authentication with JWT and OAuth
+- User profiles and management
+- Job posting and application system
+- Advanced search and filtering
+- Transparent pricing system
+- Social login (Google, GitHub)
+- Rate limiting and security measures
+- Responsive design
+- Email verification system
+- Password reset functionality
 
 ## Tech Stack
 
-- **Backend:** Python (FastAPI)
-- **Database:** PostgreSQL
-- **Frontend:** Node.js
-- **Authentication:** OAuth2 (Google/GitHub login) or JWT
-- **Hosting:** AWS
+### Backend
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
+- Alembic
+- JWT Authentication
+- Poetry for dependency management
+- SendGrid for email services
+
+### Frontend
+- Next.js 14
+- TypeScript
+- TailwindCSS
+- NextAuth.js
+- React Query
+- Framer Motion
+
+### DevOps
+- Docker
+- Docker Compose
+- GitHub Actions
+- PostgreSQL
 
 ## Getting Started
 
-To run 8thDegree locally:
+### Prerequisites
 
-```sh
-# Clone the repository
-git clone https://github.com/FairGigAI/8thDegree.git
-cd 8thDegree/backend
+- Docker and Docker Compose
+- Node.js 18+ (for local development)
+- Python 3.11+ (for local development)
 
-# Activate virtual environment
-source venv/bin/activate  # (Mac/Linux) or venv\Scripts\activate (Windows)
+### Installation
 
-# Run FastAPI
-uvicorn app.main:app --reload
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/8thDegree.git
+   cd 8thDegree
+   ```
+
+2. Copy environment files:
+   ```bash
+   cp frontend/.env.local.example frontend/.env.local
+   cp backend/.env.example backend/.env
+   ```
+
+3. Configure environment variables:
+   - Set up database credentials in `backend/.env`
+   - Configure OAuth credentials in both `.env` files
+   - Set up SendGrid API key in `backend/.env`
+
+4. Start the development environment:
+   ```bash
+   docker-compose up --build
+   ```
+
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
+
+### OAuth Configuration
+
+1. Set up Google OAuth:
+   - Go to [Google Cloud Console](https://console.cloud.google.com)
+   - Create a new project
+   - Enable Google+ API
+   - Create OAuth 2.0 credentials
+   - Add authorized redirect URIs
+   - Copy client ID and secret to `.env` files
+
+2. Set up GitHub OAuth:
+   - Go to [GitHub Developer Settings](https://github.com/settings/developers)
+   - Create a new OAuth App
+   - Add callback URL
+   - Copy client ID and secret to `.env` files
+
+## Development
+
+### Running Tests
+
+```bash
+# Backend tests
+docker-compose exec backend pytest
+
+# Frontend tests
+docker-compose exec frontend npm test
 ```
-- Open [`http://127.0.0.1:8000/docs`](http://127.0.0.1:8000/docs) to explore the API.
 
-## Roadmap
-- Backend setup and progressing
-- Initial API setup with FastAPI
-- PostgreSQL database integration
-- Security Auth
-- Ai-powered job & freelancer matching (WIP)
-- OAuth2 & JWT authentication (Coming Soon)
-- Connection and mapping (Coming Soon)
-- Stable landing page, with Roadmap (Coming Soon)
+### Code Style
 
+We use:
+- ESLint and Prettier for frontend
+- Black and isort for backend
+- Pre-commit hooks for automated formatting
 
-## Open Source & Contributions
-FairGigAI is **open-source and community-driven**! Developers, designers, and freelancers are encouraged to **contribute, suggest features, and report issues**.
+### Database Migrations
 
-### How to Contribute
-Before contributing, please read our [`CONTRIBUTING.md`](CONTRIBUTING.md) guide.
+```bash
+# Create a new migration
+docker-compose exec backend alembic revision --autogenerate -m "description"
 
-1. **Fork the Repository** – Clone it to your own GitHub.
-2. **Create a Feature Branch** – Work on new features or bug fixes.
-3. **Submit a Pull Request** – Follow contribution guidelines.
-4. **Join the Discussion** – Help shape the future of FairGigAI!
+# Apply migrations
+docker-compose exec backend alembic upgrade head
+```
 
-## Governance & Ownership
-FairGigAI is owned and maintained by **Curious-Keeper and Scaling Success LLC** under the **GPL-3.0 License**. Contributors retain rights to their contributions but must comply with open-source licensing rules. See [`OWNERSHIP.md`](OWNERSHIP.md) for details.
+## API Documentation
+
+Detailed API documentation is available at:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## Contributing
+
+Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) before submitting pull requests.
+
+## Security
+
+- All endpoints are rate-limited
+- JWT tokens expire after 30 minutes
+- Passwords are hashed with bcrypt
+- CORS is configured for security
+- OAuth2 for social login
+- Email verification required for new accounts
+- Secure password reset flow
 
 ## License
-FairGigAI is licensed under the **GPL-3.0 License**, ensuring transparency and community-driven growth.
 
----
+This project is licensed under GNU General Public License v3.0 (GPL-3.0) - see the [LICENSE](LICENSE) file for details.
 
-🔗 **Follow & Contribute:**
-- **GitHub Repository:** [github.com/FairGigAI](#)
-- **Community Forum:** [Join the Discussion](#)
+## Support
 
-🚀 **Let’s build the future of freelancing together!**
+- Documentation: [docs/](docs/)
+- Issues: [GitHub Issues](https://github.com/your-username/8thDegree/issues)
+- Community: [Discord](https://discord.gg/your-server) (WIP)
+
+## Acknowledgments
+
+- FastAPI team for the amazing framework
+- Next.js team for the React framework
+- All contributors and maintainers
 
