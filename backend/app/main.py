@@ -9,16 +9,20 @@ import time
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from sqlalchemy.exc import SQLAlchemyError
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 # Import database connection dependency
-from fairgig.database import get_db
+from app.db.session import get_db
 
 # Import API Routers
-from fairgig.routers.auth import router as auth_router
-from fairgig.routers.user import router as user_router
-from fairgig.routers.job import router as job_router
-from fairgig.routers import auth, oauth
-from fairgig.core.config import settings
+from app.api.endpoints import (
+    auth,
+    jobs,
+    freelancers,
+    matching
+)
+from app.core.config import settings
 
 app = FastAPI(
     title="8thDegree API",
@@ -35,55 +39,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Rate limiting
-class RateLimiter:
-    def __init__(self):
-        self.requests: Dict[str, List[float]] = {}
-        self.ip_limit = 100  # requests per minute
-        self.user_limit = 1000  # requests per hour
-
-    async def check_rate_limit(self, request: Request):
-        client_ip = request.client.host
-        current_time = time.time()
-
-        # Clean old requests
-        if client_ip in self.requests:
-            self.requests[client_ip] = [
-                req_time for req_time in self.requests[client_ip]
-                if current_time - req_time < 3600  # Keep last hour
-            ]
-
-        # Initialize or get request list
-        if client_ip not in self.requests:
-            self.requests[client_ip] = []
-
-        # Check limits
-        minute_ago = current_time - 60
-        hour_ago = current_time - 3600
-
-        minute_requests = len([t for t in self.requests[client_ip] if t > minute_ago])
-        hour_requests = len([t for t in self.requests[client_ip] if t > hour_ago])
-
-        if minute_requests >= self.ip_limit:
-            raise HTTPException(
-                status_code=429,
-                detail="Too many requests per minute"
-            )
-
-        if hour_requests >= self.user_limit:
-            raise HTTPException(
-                status_code=429,
-                detail="Too many requests per hour"
-            )
-
-        # Add current request
-        self.requests[client_ip].append(current_time)
-
-rate_limiter = RateLimiter()
+# Set up rate limiting
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
 
 @app.middleware("http")
 async def rate_limit_middleware(request: Request, call_next):
-    await rate_limiter.check_rate_limit(request)
+    await limiter.check_rate_limit(request)
     response = await call_next(request)
     return response
 
@@ -120,11 +82,10 @@ def test_db_connection(db: Session = Depends(get_db)):
         return {"error": str(e)}
 
 # Include API Routers
-app.include_router(auth.router)
-app.include_router(oauth.router)
-app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
-app.include_router(user_router, prefix="/users", tags=["Users"])
-app.include_router(job_router, prefix="/jobs", tags=["Jobs"])
+app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
+app.include_router(jobs.router, prefix="/api/jobs", tags=["Jobs"])
+app.include_router(freelancers.router, prefix="/api/freelancers", tags=["Freelancers"])
+app.include_router(matching.router, prefix="/api/matching", tags=["Matching"])
 
 # Serve Static Files (Logo, Images, etc.)
 app.mount("/static", StaticFiles(directory="static"), name="static")

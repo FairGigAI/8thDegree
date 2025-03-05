@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "tailwindcss"; 
-
 :root {
-  --background: #ffffff;
   --foreground: #171717;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,5 +17,4 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-sans);
 }

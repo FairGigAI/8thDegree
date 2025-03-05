@@ -20,39 +20,54 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
    cp frontend/.env.local.example frontend/.env.local
    cp backend/.env.example backend/.env
 
+   # Install dependencies
+   cd frontend && npm install
+   cd ../backend && pip install -r requirements.txt
+
    # Start the development environment
    docker-compose up --build
    ```
 
-## Development Workflow
+## Development Process
 
-1. Create a new branch for your feature:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+We use GitHub to host code, track issues and feature requests, and accept pull requests.
 
-2. Make your changes following our [Style Guide](style-guide.md)
+1. Create a new branch from `main` following our naming convention
+2. Make your changes following our style guide
+3. Add or update tests as needed
+4. Ensure all tests pass
+5. Update documentation
+6. Submit a pull request
 
-3. Run tests:
-   ```bash
-   # Backend tests
-   docker-compose exec backend pytest
+## Branch Naming Convention
 
-   # Frontend tests
-   docker-compose exec frontend npm test
-   ```
+- Feature branches: `feature/description`
+- Bug fix branches: `fix/description`
+- Documentation branches: `docs/description`
+- Release branches: `release/version`
+- Hotfix branches: `hotfix/description`
 
-4. Commit your changes:
-   ```bash
-   git commit -m "feat: your feature description"
-   ```
+## Commit Message Format
 
-5. Push to your fork:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-6. Create a Pull Request
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+Types:
+- feat: A new feature
+- fix: A bug fix
+- docs: Documentation only changes
+- style: Changes that do not affect the meaning of the code
+- refactor: A code change that neither fixes a bug nor adds a feature
+- perf: A code change that improves performance
+- test: Adding missing tests
+- chore: Changes to the build process or auxiliary tools
 
 ## Pull Request Guidelines
 
@@ -61,6 +76,9 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 - Update documentation as needed
 - Follow the existing code style
 - Keep PRs focused and manageable
+- Ensure all automated checks pass
+- Include relevant test cases
+- Update the CHANGELOG.md
 
 ## Project Structure
 
@@ -72,25 +90,93 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 │   └── Dockerfile    # Backend container
 ├── frontend/         # Next.js frontend
 │   ├── src/         # Source code
+│   │   ├── app/     # Next.js app router
+│   │   ├── components/ # React components
+│   │   ├── lib/     # Utility functions
+│   │   └── styles/  # Global styles
 │   ├── public/      # Static files
 │   └── Dockerfile   # Frontend container
 ├── docs/            # Documentation
 └── docker-compose.yml
 ```
 
+## Code Style
+
+- TypeScript: Follow ESLint and existing code style
+- Python: Follow PEP 8 guidelines
+- Use Prettier for frontend code formatting
+- Follow React best practices and hooks rules
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Maintain consistent component structure
+- Follow accessibility best practices
+- Optimize imports and remove unused code
+
 ## Testing
 
 - Write unit tests for new features
-- Ensure all tests pass before submitting PR
+- Update existing tests when modifying features
 - Include integration tests for API endpoints
 - Test across different browsers and devices
+- Include mobile responsive testing
+- Test for accessibility compliance
+- Include edge cases in test coverage
+- Ensure all tests pass before submitting PR
 
 ## Documentation
 
 - Update relevant documentation files
-- Add comments for complex logic
-- Include examples for new features
-- Update API documentation
+- Document new environment variables
+- Keep API documentation up to date
+- Add JSDoc comments for TypeScript functions
+- Include usage examples for new features
+- Document any breaking changes
+- Update component props documentation
+- Maintain architecture documentation
+
+## Issue Reporting
+
+### Bug Reports
+
+Include the following information:
+
+1. Node.js and Python versions
+2. Operating system
+3. Steps to reproduce
+4. Expected behavior
+5. Actual behavior
+6. Error messages or screenshots
+7. Relevant configuration files
+
+### Feature Requests
+
+Provide the following details:
+
+1. Clear description of the feature
+2. Use cases and benefits
+3. Potential implementation approach
+4. Relevant examples
+5. Impact on existing functionality
+6. Estimated complexity and scope
+
+## Security
+
+- Never commit sensitive information
+- Report security vulnerabilities privately
+- Follow OWASP security guidelines
+- Keep dependencies up to date
+- Use environment variables for secrets
+- Follow secure coding practices
+- Implement proper input validation
+- Use secure authentication methods
+
+## Release Process
+
+1. Update version in `pyproject.toml` and `package.json`
+2. Update CHANGELOG.md
+3. Create a release tag
+4. Deploy to staging for testing
+5. Deploy to production after approval
 
 ## Getting Help
 
@@ -98,13 +184,7 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 - Open an issue for bugs
 - Join our community discussions
 - Contact maintainers
-
-## Release Process
-
-1. Update version in `pyproject.toml` and `package.json`
-2. Update CHANGELOG.md
-3. Create a release tag
-4. Deploy to staging/production
+- Review closed issues and PRs
 
 ## License
 
