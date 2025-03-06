@@ -1,150 +1,107 @@
-# 8thDegree
+# 8thDegree - AI-Powered Freelancing Platform
 
-8thDegree is an open-source, fair freelance marketplace platform built with FastAPI and Next.js. It connects freelancers with clients while ensuring fair practices and transparent pricing.
+A modern freelancing platform that leverages artificial intelligence to connect clients with the perfect freelancers. Built with Next.js, TypeScript, and PostgreSQL.
 
 ## Features
 
-- Secure authentication with JWT and OAuth
-- User profiles and management
-- Job posting and application system
-- Advanced search and filtering
-- Transparent pricing system
-- Social login (Google, GitHub)
-- Rate limiting and security measures
-- Responsive design
-- Email verification system
-- Password reset functionality
+- **AI-Powered Matching**: Real-time job and freelancer suggestions using OpenAI embeddings
+- **Smart Search**: Dynamic search with instant results and AI analysis
+- **Review System**: Comprehensive rating system with bias detection
+- **Authentication**: Secure authentication with GitHub OAuth
+- **Real-time Updates**: Instant notifications and live updates
+- **Responsive Design**: Modern, mobile-first interface
 
 ## Tech Stack
-
-### Backend
-- FastAPI
-- PostgreSQL
-- SQLAlchemy
-- Alembic
-- JWT Authentication
-- Poetry for dependency management
-- SendGrid for email services
 
 ### Frontend
 - Next.js 14
 - TypeScript
-- TailwindCSS
-- NextAuth.js
-- React Query
+- Tailwind CSS
 - Framer Motion
+- Prisma (ORM)
+- OpenAI API
 
-### DevOps
-- Docker
-- Docker Compose
-- GitHub Actions
+### Backend
 - PostgreSQL
+- Prisma
+- Next.js API Routes
+- OpenAI Embeddings
 
 ## Getting Started
 
 ### Prerequisites
-
-- Docker and Docker Compose
-- Node.js 18+ (for local development)
-- Python 3.11+ (for local development)
+- Node.js 18+
+- PostgreSQL
+- OpenAI API Key
 
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/8thDegree.git
-   cd 8thDegree
-   ```
-
-2. Copy environment files:
-   ```bash
-   cp frontend/.env.local.example frontend/.env.local
-   cp backend/.env.example backend/.env
-   ```
-
-3. Configure environment variables:
-   - Set up database credentials in `backend/.env`
-   - Configure OAuth credentials in both `.env` files
-   - Set up SendGrid API key in `backend/.env`
-
-4. Start the development environment:
-   ```bash
-   docker-compose up --build
-   ```
-
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
-
-### OAuth Configuration
-
-1. Set up Google OAuth:
-   - Go to [Google Cloud Console](https://console.cloud.google.com)
-   - Create a new project
-   - Enable Google+ API
-   - Create OAuth 2.0 credentials
-   - Add authorized redirect URIs
-   - Copy client ID and secret to `.env` files
-
-2. Set up GitHub OAuth:
-   - Go to [GitHub Developer Settings](https://github.com/settings/developers)
-   - Create a new OAuth App
-   - Add callback URL
-   - Copy client ID and secret to `.env` files
-
-## Development
-
-### Running Tests
-
 ```bash
-# Backend tests
-docker-compose exec backend pytest
-
-# Frontend tests
-docker-compose exec frontend npm test
+git clone https://github.com/yourusername/8thDegree.git
+cd 8thDegree
 ```
 
-### Code Style
-
-We use:
-- ESLint and Prettier for frontend
-- Black and isort for backend
-- Pre-commit hooks for automated formatting
-
-### Database Migrations
-
+2. Install dependencies:
 ```bash
-# Create a new migration
-docker-compose exec backend alembic revision --autogenerate -m "description"
-
-# Apply migrations
-docker-compose exec backend alembic upgrade head
+cd frontend
+npm install
 ```
 
-## API Documentation
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+Edit `.env.local` with your configuration:
+- `DATABASE_URL`: PostgreSQL connection string
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `GITHUB_ID` and `GITHUB_SECRET`: GitHub OAuth credentials
+- Other necessary environment variables
 
-Detailed API documentation is available at:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+4. Initialize the database:
+```bash
+npx prisma migrate dev
+npx prisma db seed
+```
+
+5. Start the development server:
+```bash
+npm run dev
+```
+
+## Project Structure
+
+```
+frontend/
+├── src/
+│   ├── app/              # Next.js app router
+│   ├── components/       # React components
+│   ├── lib/             # Utility functions
+│   └── styles/          # Global styles
+├── prisma/              # Database schema and migrations
+└── public/             # Static assets
+```
 
 ## Contributing
 
-Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) before submitting pull requests.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## Security
+## Environment Variables
 
-- All endpoints are rate-limited
-- JWT tokens expire after 30 minutes
-- Passwords are hashed with bcrypt
-- CORS is configured for security
-- OAuth2 for social login
-- Email verification required for new accounts
-- Secure password reset flow
+Required environment variables:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/8thdegree
+OPENAI_API_KEY=your_openai_api_key
+GITHUB_ID=your_github_client_id
+GITHUB_SECRET=your_github_client_secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret
+```
 
 ## License
 
-This project is licensed under GNU General Public License v3.0 (GPL-3.0) - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 

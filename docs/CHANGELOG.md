@@ -2,6 +2,39 @@
 
 All notable changes to the 8thDegree project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- AI-powered search functionality with OpenAI embeddings
+- Real-time search suggestions with debounced queries
+- Animated AI analysis indicator
+- Interactive search onboarding with example prompts
+- Review system with bias detection
+- Comprehensive rating system for jobs and freelancers
+- Upvote/downvote functionality with anti-gaming measures
+- Modern, responsive UI with Tailwind CSS
+- Framer Motion animations for enhanced UX
+- Environment configuration management
+- Comprehensive documentation and contribution guidelines
+
+### Changed
+- Updated search bar UI with improved animations
+- Enhanced job and freelancer matching algorithm
+- Improved navigation structure with persistent navbar
+- Optimized database queries for better performance
+- Enhanced error handling and user feedback
+- Streamlined authentication flow
+- Improved mobile responsiveness
+
+### Fixed
+- Search debounce timing for better performance
+- Authentication redirect handling
+- Database schema relationships
+- Type definitions for better TypeScript support
+- Environment variable configuration
+- Review submission validation
+- Vote duplicate prevention
+
 ## [0.2.0] - 2024-03-04
 
 ### Added

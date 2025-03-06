@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import type { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
 interface JobFormData {
@@ -40,7 +41,7 @@ export default function PostJobPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${session?.accessToken}`,
+          Authorization: `Bearer ${(session as Session & { user: { accessToken?: string } })?.user?.accessToken}`,
         },
         body: JSON.stringify({
           ...formData,
