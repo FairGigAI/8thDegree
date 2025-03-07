@@ -72,42 +72,125 @@ A modern freelancing platform that leverages artificial intelligence for fair, r
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL
+- Python 3.11+
+- PostgreSQL 15+
+- Redis 7+
 - OpenAI API Key
+- Docker and Docker Compose (optional)
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository with submodules:
 ```bash
-git clone https://github.com/yourusername/8thDegree.git
-cd 8thDegree
+# Clone with submodules
+git clone --recurse-submodules https://github.com/FairGigAI/8thDegree.git
+
+# Or if you've already cloned the repository:
+git submodule update --init --recursive
 ```
 
-2. Install dependencies:
+2. Set up environment variables:
 ```bash
-cd frontend
+# Backend environment
+cp backend/.env.example backend/.env
+
+# Frontend environment
+cp frontend/.env.example frontend/.env
+
+# AI service environment
+cp ai/.env.example ai/.env
+```
+
+3. Install dependencies:
+```bash
+# Backend dependencies
+cd backend
+poetry install
+
+# Frontend dependencies
+cd ../frontend
 npm install
+
+# AI service dependencies
+cd ../ai
+poetry install
 ```
 
-3. Set up environment variables:
-```bash
-cp .env.example .env.local
-```
-Edit `.env.local` with your configuration:
-- `DATABASE_URL`: PostgreSQL connection string
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `GITHUB_ID` and `GITHUB_SECRET`: GitHub OAuth credentials
-- Other necessary environment variables
+4. Start the services:
 
-4. Initialize the database:
+Using Docker:
 ```bash
-npx prisma migrate dev
-npx prisma db seed
+docker-compose up -d
 ```
 
-5. Start the development server:
+Or manually:
 ```bash
+# Terminal 1 - Backend
+cd backend
+poetry run uvicorn app.main:app --reload
+
+# Terminal 2 - Frontend
+cd frontend
 npm run dev
+
+# Terminal 3 - AI Service
+cd ai
+poetry run uvicorn app.main:app --reload --port 8001
+```
+
+5. Initialize the database:
+```bash
+cd backend
+poetry run alembic upgrade head
+```
+
+6. Seed the database (optional):
+```bash
+cd backend
+poetry run python -m scripts.seed
+```
+
+### Development Workflow
+
+1. **Pulling Updates**:
+```bash
+# Update main repository and submodules
+git pull
+git submodule update --remote
+
+# Switch to development branch
+git checkout dev
+git submodule foreach 'git checkout dev'
+```
+
+2. **Making Changes**:
+```bash
+# Create feature branch
+git checkout -b feature/your-feature
+
+# If working on AI service
+cd ai
+git checkout -b feature/ai-feature
+
+# After changes
+git add .
+git commit -m "feat: your feature description"
+git push origin feature/your-feature
+```
+
+3. **Running Tests**:
+```bash
+# Backend tests
+cd backend
+poetry run pytest
+
+# Frontend tests
+cd frontend
+npm test
+
+# AI service tests
+cd ai
+poetry run pytest
 ```
 
 ## Project Structure
@@ -137,20 +220,32 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Environment Variables
 
-Required environment variables:
-
+### Backend (.env)
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/8thdegree
+REDIS_URL=redis://localhost:6379/0
+JWT_SECRET_KEY=your_jwt_secret
+AI_SERVICE_URL=http://localhost:8001
+AI_SERVICE_API_KEY=your_ai_service_key
+```
+
+### AI Service (.env)
+```env
 OPENAI_API_KEY=your_openai_api_key
-GITHUB_ID=your_github_client_id
-GITHUB_SECRET=your_github_client_secret
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret
+REDIS_URL=redis://localhost:6379/1
+MODEL_CACHE_TTL=3600
+LOG_LEVEL=DEBUG
+```
+
+### Frontend (.env)
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_AI_SERVICE_URL=http://localhost:8001
 ```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL 3 License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 
