@@ -1,71 +1,84 @@
 version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8000/api/v1
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GITHUB_ID=${GITHUB_CLIENT_ID}
-      - GITHUB_SECRET=${GITHUB_CLIENT_SECRET}
-      - NEXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
-      - NEXT_PUBLIC_ENVIRONMENT=${ENVIRONMENT}
-      - NEXT_PUBLIC_ENABLE_ANALYTICS=${ENABLE_ANALYTICS}
-      - NEXT_PUBLIC_ENABLE_ERROR_TRACKING=${ENABLE_ERROR_TRACKING}
-    depends_on:
-      - backend
-
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
-      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
-      - CORS_ORIGINS=${CORS_ORIGINS}
-      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
-      - EMAIL_FROM=${EMAIL_FROM}
       - REDIS_URL=redis://redis:6379/0
-      - SENTRY_DSN=${SENTRY_DSN}
-      - ENVIRONMENT=${ENVIRONMENT}
-      - LOG_LEVEL=${LOG_LEVEL}
-      - PROMETHEUS_MULTIPROC_DIR=/tmp
-      - ENABLE_METRICS=${ENABLE_METRICS}
-      - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE}
-      - SESSION_COOKIE_HTTPONLY=${SESSION_COOKIE_HTTPONLY}
-      - SESSION_COOKIE_SAMESITE=${SESSION_COOKIE_SAMESITE}
+      - AI_SERVICE_URL=http://ai-service:8001
+      - AI_SERVICE_API_KEY=${AI_SERVICE_API_KEY}
     depends_on:
       - db
       - redis
+      - ai-service
+    volumes:
+      - ./backend:/app
+    networks:
+      - 8thdegree-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_AI_SERVICE_URL=http://localhost:8001
+    volumes:
+      - ./frontend:/app
+    networks:
+      - 8thdegree-network
+
+  ai-service:
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - REDIS_URL=redis://redis:6379/1
+      - MODEL_CACHE_TTL=3600
+      - LOG_LEVEL=DEBUG
+    depends_on:
+      - redis
+    volumes:
+      - ./ai:/app
+    networks:
+      - 8thdegree-network
 
   db:
-    image: postgres:15
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - 8thdegree-network
 
   redis:
-    image: redis:7
+    image: redis:7-alpine
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - 8thdegree-network
 
 volumes:
   postgres_data:
-  redis_data: 
+  redis_data:
+
+networks:
+  8thdegree-network:
+    driver: bridge 
