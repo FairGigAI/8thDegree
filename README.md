@@ -1,31 +1,72 @@
 # 8thDegree - AI-Powered Freelancing Platform
 
-A modern freelancing platform that leverages artificial intelligence to connect clients with the perfect freelancers. Built with Next.js, TypeScript, and PostgreSQL.
+A modern freelancing platform that leverages artificial intelligence for fair, real-time matching between clients and freelancers. Built with Next.js, FastAPI, and advanced AI capabilities.
 
-## Features
+## Core Features
 
-- **AI-Powered Matching**: Real-time job and freelancer suggestions using OpenAI embeddings
-- **Smart Search**: Dynamic search with instant results and AI analysis
-- **Review System**: Comprehensive rating system with bias detection
-- **Authentication**: Secure authentication with GitHub OAuth
-- **Real-time Updates**: Instant notifications and live updates
-- **Responsive Design**: Modern, mobile-first interface
+### AI-Powered Matching
+- Real-time job and freelancer matching using OpenAI embeddings
+- Bias detection and prevention system
+- Continuous learning and optimization
+- Fair opportunity distribution
+
+### Smart Search & Discovery
+- AI-enhanced search with semantic understanding
+- Real-time recommendations
+- Regional relevance optimization
+- Personalized results
+
+### Fair Platform
+- Bias detection in job posts and reviews
+- Fair matching algorithms
+- Success rate tracking
+- Engagement optimization
+
+### Global Scale
+- Region-aware matching
+- Cross-region opportunities
+- Real-time updates
+- Distributed AI processing
+
+## Architecture
+
+### AI Layer
+- OpenAI embeddings for semantic matching
+- Real-time matching engine
+- Bias detection system
+- Learning and optimization engine
+
+### Backend
+- FastAPI for high-performance API
+- PostgreSQL with AI-aware sharding
+- Redis for real-time processing
+- Elasticsearch for search
+
+### Frontend
+- Next.js 14 with React
+- Real-time WebSocket updates
+- Responsive UI with Tailwind
+- Client-side AI processing
 
 ## Tech Stack
+
+### AI & ML
+- OpenAI API
+- Custom matching algorithms
+- Bias detection models
+- Learning systems
+
+### Backend
+- FastAPI
+- PostgreSQL
+- Redis
+- Elasticsearch
 
 ### Frontend
 - Next.js 14
 - TypeScript
-- Tailwind CSS
-- Framer Motion
-- Prisma (ORM)
-- OpenAI API
-
-### Backend
-- PostgreSQL
-- Prisma
-- Next.js API Routes
-- OpenAI Embeddings
+- TailwindCSS
+- WebSocket
 
 ## Getting Started
 
@@ -70,16 +111,24 @@ npm run dev
 ```
 
 ## Project Structure
-
 ```
-frontend/
-├── src/
-│   ├── app/              # Next.js app router
-│   ├── components/       # React components
-│   ├── lib/             # Utility functions
-│   └── styles/          # Global styles
-├── prisma/              # Database schema and migrations
-└── public/             # Static assets
+8thDegree/
+├── backend/
+│   ├── app/
+│   │   ├── ai/              # AI services
+│   │   ├── api/             # API endpoints
+│   │   ├── core/            # Core config
+│   │   └── models/          # Data models
+│   └── docs/                # Documentation
+├── frontend/
+│   ├── src/
+│   │   ├── ai/             # Client AI
+│   │   ├── app/            # Pages
+│   │   └── components/     # UI
+└── ai-service/             # Dedicated AI
+    ├── matching/           # Matching engine
+    ├── bias/              # Bias detection
+    └── learning/          # Learning system
 ```
 
 ## Contributing
