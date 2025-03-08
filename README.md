@@ -2,6 +2,10 @@
 
 A modern freelancing platform that leverages artificial intelligence for fair, real-time matching between clients and freelancers. Built with Next.js, FastAPI, and advanced AI capabilities.
 
+🔗 [View Live Preview](https://fairgigai.github.io/8thdegree-preview)
+
+![Screenshot 2025-03-08 081727](https://github.com/user-attachments/assets/d5954d8f-babb-4588-b573-dd4a2b672f91)
+
 ## Core Features
 
 ### AI-Powered Matching
@@ -10,6 +14,8 @@ A modern freelancing platform that leverages artificial intelligence for fair, r
 - Continuous learning and optimization
 - Fair opportunity distribution
 - Real-time performance monitoring
+
+![Screenshot 2025-03-08 081803](https://github.com/user-attachments/assets/0c8e324f-281a-4026-b811-8ffeaaed8e55)
 
 ### Smart Search & Discovery
 - AI-enhanced search with semantic understanding
@@ -25,6 +31,8 @@ A modern freelancing platform that leverages artificial intelligence for fair, r
 - Engagement optimization with fairness guarantees
 - Real-time compliance checking
 
+![Screenshot 2025-03-08 081844](https://github.com/user-attachments/assets/1da0e6a0-2324-40a8-984e-3597841b104f)
+
 ### Global Scale
 - Region-aware matching with local optimization
 - Cross-region opportunities with fair distribution
@@ -33,6 +41,8 @@ A modern freelancing platform that leverages artificial intelligence for fair, r
 - Global compliance management
 
 ## Architecture
+
+![Screenshot 2025-03-08 081929](https://github.com/user-attachments/assets/97ac5492-1373-43ba-90b2-3015732b8e34)
 
 ### AI Layer
 - OpenAI embeddings for semantic matching
