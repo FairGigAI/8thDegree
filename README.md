@@ -1,77 +1,71 @@
 # 8thDegree - AI-Powered Freelancing Platform
 
-A modern freelancing platform that leverages artificial intelligence for fair, real-time matching between clients and freelancers. Built with Next.js, FastAPI, and advanced AI capabilities.
+## Overview
+8thDegree is a next-generation freelancing platform that uses AI to provide fair, real-time matching between clients and freelancers. Our platform focuses on creating equal opportunities while maintaining high-quality service delivery.
 
-🔗 [View Live Preview](https://fairgigai.github.io/8thdegree-preview)
+## Documentation Structure
 
-![Screenshot 2025-03-08 081727](https://github.com/user-attachments/assets/d5954d8f-babb-4588-b573-dd4a2b672f91)
+### Architecture
+- [Backend Architecture](docs/architecture/backend.md)
+- [Frontend Architecture](docs/architecture/frontend.md)
+- [AI Architecture](docs/architecture/ai.md)
+- [System Overview](docs/architecture/overview.md)
+
+### API Documentation
+- [Backend API](docs/api/backend.md)
+- [Frontend API](docs/api/frontend.md)
+- [AI Service API](docs/api/ai.md)
+
+### Development
+- [Getting Started](docs/development/getting-started.md)
+- [Style Guide](docs/development/style-guide.md)
+- [Workflow](docs/development/workflow.md)
+- [AI Implementation](docs/development/ai-implementation.md)
+
+### Security
+- [Best Practices](docs/security/best-practices.md)
+- [Privacy Policy](docs/security/privacy.md)
+- [Guidelines](docs/security/guidelines.md)
+
+### Project Guidelines
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [Contributing](docs/CONTRIBUTING.md)
+- [License](docs/LICENSE.md)
+- [CLA](docs/CLA.md)
 
 ## Core Features
 
 ### AI-Powered Matching
-- Real-time job and freelancer matching using OpenAI embeddings
-- Advanced bias detection and prevention system
-- Continuous learning and optimization
+- Real-time job and freelancer matching
+- Bias detection and prevention
+- Continuous learning system
 - Fair opportunity distribution
-- Real-time performance monitoring
-
-![Screenshot 2025-03-08 081803](https://github.com/user-attachments/assets/0c8e324f-281a-4026-b811-8ffeaaed8e55)
 
 ### Smart Search & Discovery
-- AI-enhanced search with semantic understanding
-- Real-time recommendations with caching
-- Regional relevance optimization
-- Personalized results with bias protection
-- Performance-optimized matching
+- AI-enhanced search capabilities
+- Real-time recommendations
+- Personalized results
+- Skill-based matching
 
 ### Fair Platform
-- Comprehensive bias detection in job posts and reviews
-- Fair matching algorithms with monitoring
-- Success rate tracking and optimization
-- Engagement optimization with fairness guarantees
-- Real-time compliance checking
-
-![Screenshot 2025-03-08 081844](https://github.com/user-attachments/assets/1da0e6a0-2324-40a8-984e-3597841b104f)
+- Bias detection in job posts and reviews
+- Fair matching algorithms
+- Engagement optimization
+- Equal opportunity system
 
 ### Global Scale
-- Region-aware matching with local optimization
-- Cross-region opportunities with fair distribution
-- Real-time updates with rate limiting
-- Distributed AI processing with failover
-- Global compliance management
+- Region-aware matching
+- Distributed AI processing
+- Cross-region optimization
+- Global talent pool
 
 ## Architecture
 
-![Screenshot 2025-03-08 081929](https://github.com/user-attachments/assets/97ac5492-1373-43ba-90b2-3015732b8e34)
-
 ### AI Layer
-- OpenAI embeddings for semantic matching
-- Real-time matching engine with caching
-- Advanced bias detection system
-- Learning and optimization engine
-- Performance monitoring and metrics
-
-### Backend
-- FastAPI for high-performance API
-- PostgreSQL with AI-aware sharding
-- Redis for real-time processing
-- Elasticsearch for search
-- Prometheus for monitoring
-
-### Frontend
-- Next.js 14 with React
-- Real-time WebSocket updates
-- Responsive UI with Tailwind
-- Client-side AI processing
-- Performance optimization
-
-## Tech Stack
-
-### AI & ML
-- OpenAI API
-- Custom matching algorithms
-- Bias detection models
-- Learning systems
+- OpenAI embeddings
+- Real-time matching
+- Bias detection
+- Learning system
 
 ### Backend
 - FastAPI
@@ -81,230 +75,101 @@ A modern freelancing platform that leverages artificial intelligence for fair, r
 
 ### Frontend
 - Next.js 14
+- React
+- Tailwind CSS
+- Shadcn/ui
+
+## Tech Stack
+
+### AI & ML
+- OpenAI API
+- TensorFlow
+- PyTorch
+- scikit-learn
+
+### Backend
+- Python 3.11
+- FastAPI
+- SQLAlchemy
+- Alembic
+
+### Frontend
 - TypeScript
+- Next.js 14
+- Prisma
 - TailwindCSS
-- WebSocket
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- Python 3.11+
-- PostgreSQL 15+
-- Redis 7+
-- OpenAI API Key
-- Docker and Docker Compose (optional)
-
-### Installation
-
-1. Clone the repository with submodules:
-```bash
-# Clone with submodules
-git clone --recurse-submodules https://github.com/FairGigAI/8thDegree.git
-
-# Or if you've already cloned the repository:
-git submodule update --init --recursive
-```
-
-2. Set up environment variables:
-```bash
-# Backend environment
-cp backend/.env.example backend/.env
-
-# Frontend environment
-cp frontend/.env.example frontend/.env
-
-# AI service environment
-cp ai/.env.example ai/.env
-```
-
-3. Install dependencies:
-```bash
-# Backend dependencies
-cd backend
-poetry install
-
-# Frontend dependencies
-cd ../frontend
-npm install
-
-# AI service dependencies
-cd ../ai
-poetry install
-```
-
-4. Start the services:
-
-Using Docker:
-```bash
-docker-compose up -d
-```
-
-Or manually:
-```bash
-# Terminal 1 - Backend
-cd backend
-poetry run uvicorn app.main:app --reload
-
-# Terminal 2 - Frontend
-cd frontend
-npm run dev
-
-# Terminal 3 - AI Service
-cd ai
-poetry run uvicorn app.main:app --reload --port 8001
-```
-
-5. Initialize the database:
-```bash
-cd backend
-poetry run alembic upgrade head
-```
-
-6. Seed the database (optional):
-```bash
-cd backend
-poetry run python -m scripts.seed
-```
-
-### Development Workflow
-
-1. **Pulling Updates**:
-```bash
-# Update main repository and submodules
-git pull
-git submodule update --remote
-
-# Switch to development branch
-git checkout dev
-git submodule foreach 'git checkout dev'
-```
-
-2. **Making Changes**:
-```bash
-# Create feature branch
-git checkout -b feature/your-feature
-
-# If working on AI service
-cd ai
-git checkout -b feature/ai-feature
-
-# After changes
-git add .
-git commit -m "feat: your feature description"
-git push origin feature/your-feature
-```
-
-3. **Running Tests**:
-```bash
-# Backend tests
-cd backend
-poetry run pytest
-
-# Frontend tests
-cd frontend
-npm test
-
-# AI service tests
-cd ai
-poetry run pytest
-```
 
 ## Project Structure
 ```
 8thDegree/
-├── backend/
-│   ├── app/
-│   │   ├── ai/              # AI services
-│   │   ├── api/             # API endpoints
-│   │   ├── core/            # Core config
-│   │   └── models/          # Data models
-│   └── docs/                # Documentation
-├── frontend/
-│   ├── src/
-│   │   ├── ai/             # Client AI
-│   │   ├── app/            # Pages
-│   │   └── components/     # UI
-└── ai-service/             # Dedicated AI
-    ├── matching/           # Matching engine
-    ├── bias/              # Bias detection
-    └── learning/          # Learning system
+├── backend/           # FastAPI backend
+│   ├── app/          # Main application
+│   └── tests/        # Backend tests
+├── frontend/         # Next.js frontend
+│   ├── src/         # Source code
+│   └── tests/       # Frontend tests
+├── ai/              # AI service
+│   ├── app/         # AI application
+│   └── tests/       # AI tests
+├── docs/            # Documentation
+└── preview/         # Preview service
+```
+```
+docs/
+├── api/                    # API Documentation
+├── architecture/          # Architecture Documentation
+├── development/          # Development Documentation
+├── security/             # Security Documentation
+└── preview/             # Preview Service Documentation
+```
+
+## Getting Started
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL 15+
+- Redis 7+
+
+### Installation
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/8thDegree.git
+cd 8thDegree
+```
+
+2. Install backend dependencies
+```bash
+cd backend
+poetry install
+```
+
+3. Install frontend dependencies
+```bash
+cd frontend
+npm install
+```
+
+4. Set up environment variables
+```bash
+cp .env.example .env
+```
+
+5. Start development servers
+```bash
+# Backend
+poetry run uvicorn app.main:app --reload
+
+# Frontend
+npm run dev
 ```
 
 ## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## Environment Variables
-
-### Backend (.env)
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/8thdegree
-REDIS_URL=redis://localhost:6379/0
-JWT_SECRET_KEY=your_jwt_secret
-AI_SERVICE_URL=http://localhost:8001
-AI_SERVICE_API_KEY=your_ai_service_key
-```
-
-### AI Service (.env)
-```env
-OPENAI_API_KEY=your_openai_api_key
-REDIS_URL=redis://localhost:6379/1
-MODEL_CACHE_TTL=3600
-LOG_LEVEL=DEBUG
-```
-
-### Frontend (.env)
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_AI_SERVICE_URL=http://localhost:8001
-```
+Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) and [Code of Conduct](docs/CODE_OF_CONDUCT.md) before submitting contributions.
 
 ## License
-
-This project is licensed under the GPL 3 License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the terms of the [MIT License](docs/LICENSE.md).
 
 ## Support
-
-- Documentation: [docs/](docs/)
-- Issues: [GitHub Issues](https://github.com/your-username/8thDegree/issues)
-- Community: [Discord](https://discord.gg/your-server) (WIP)
-
-## Acknowledgments
-
-- FastAPI team for the amazing framework
-- Next.js team for the React framework
-- All contributors and maintainers
-
-## Security & Compliance
-
-### Security Features
-- API key authentication
-- Rate limiting and circuit breakers
-- Input validation and sanitization
-- Output filtering and protection
-- Regular security audits
-
-### Compliance
-- GDPR and CCPA compliant
-- SOC 2 Type II certified
-- ISO 27001 compliance
-- Regular compliance monitoring
-- Data protection measures
-
-### Privacy
-- Data encryption in transit and at rest
-- Privacy-preserving AI processing
-- Data minimization practices
-- User consent management
-- Regular privacy audits
-
-## Documentation
-
-For detailed documentation, please refer to:
-- [API Documentation](ai/docs/API.md)
-- [Security Policy](ai/SECURITY.md)
-- [Privacy Policy](ai/PRIVACY.md)
-- [Code of Conduct](ai/CODE_OF_CONDUCT.md)
-- [License](ai/LICENSE)
+For support, please open an issue or contact our team at support@8thdegree.ai.
 

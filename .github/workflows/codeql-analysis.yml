@@ -1,0 +1,133 @@
+name: Security Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'  # Daily
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  codeql-scan:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python', 'javascript', 'typescript' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/analyze@v2
+
+  dependency-check:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Python Security Check
+        uses: pypa/gh-action-pip-audit@v1.0.8
+        with:
+          inputs: |
+            backend/requirements.txt
+            ai/requirements.txt
+
+      - name: Node.js Security Check
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: GitLeaks Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+  vulnerability-scan:
+    name: Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          ignore-unfixed: true
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    needs: [codeql-scan, dependency-check, secret-scan, vulnerability-scan]
+    if: always()
+    steps:
+      - name: Check job status
+        run: |
+          if [[ "${{ needs.codeql-scan.result }}" == "failure" || \
+                "${{ needs.dependency-check.result }}" == "failure" || \
+                "${{ needs.secret-scan.result }}" == "failure" || \
+                "${{ needs.vulnerability-scan.result }}" == "failure" ]]; then
+            echo "Security checks failed!"
+            exit 1
+          fi
+
+      - name: Create security report
+        if: always()
+        run: |
+          echo "Security Audit Report" > security-report.md
+          echo "Date: $(date)" >> security-report.md
+          echo "Status: ${{ job.status }}" >> security-report.md
+          echo "CodeQL Analysis: ${{ needs.codeql-scan.result }}" >> security-report.md
+          echo "Dependency Check: ${{ needs.dependency-check.result }}" >> security-report.md
+          echo "Secret Scan: ${{ needs.secret-scan.result }}" >> security-report.md
+          echo "Vulnerability Scan: ${{ needs.vulnerability-scan.result }}" >> security-report.md
+
+      - name: Upload security report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report
+          path: security-report.md
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: 'security-alerts'
+          slack-message: |
+            Security checks failed!
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

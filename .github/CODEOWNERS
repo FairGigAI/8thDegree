@@ -1,0 +1,59 @@
+# Default owners for everything in the repo
+* @8thDegree/core-team
+
+# Frontend code
+/frontend/ @8thDegree/frontend-team
+/frontend/src/components/ @8thDegree/ui-team
+/frontend/src/styles/ @8thDegree/ui-team
+
+# Backend code
+/backend/ @8thDegree/backend-team
+/backend/app/models/ @8thDegree/database-team
+/backend/app/api/ @8thDegree/api-team
+
+# AI service code
+/ai/ @8thDegree/ai-team
+/ai/models/ @8thDegree/ml-team
+/ai/training/ @8thDegree/ml-team
+
+# Infrastructure and deployment
+/.github/ @8thDegree/devops-team
+/docker/ @8thDegree/devops-team
+/k8s/ @8thDegree/devops-team
+
+# Documentation
+/docs/ @8thDegree/docs-team
+*.md @8thDegree/docs-team
+
+# Security-sensitive files
+/backend/app/core/security/ @8thDegree/security-team
+/backend/app/core/auth/ @8thDegree/security-team
+*.key @8thDegree/security-team
+*.pem @8thDegree/security-team
+
+# Configuration files
+*.yml @8thDegree/devops-team
+*.yaml @8thDegree/devops-team
+*.json @8thDegree/devops-team
+*.toml @8thDegree/devops-team
+*.ini @8thDegree/devops-team
+
+# Database migrations
+/backend/migrations/ @8thDegree/database-team
+/frontend/prisma/migrations/ @8thDegree/database-team
+
+# Test files
+/backend/tests/ @8thDegree/qa-team
+/frontend/tests/ @8thDegree/qa-team
+/ai/tests/ @8thDegree/qa-team
+
+# Package management
+package.json @8thDegree/frontend-team
+package-lock.json @8thDegree/frontend-team
+poetry.lock @8thDegree/backend-team
+pyproject.toml @8thDegree/backend-team
+
+# Security and compliance
+/docs/security/ @8thDegree/security-team
+/docs/legal/ @8thDegree/legal-team
+LICENSE* @8thDegree/legal-team

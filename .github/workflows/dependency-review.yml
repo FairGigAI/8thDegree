@@ -1,0 +1,43 @@
+name: "Dependency Review"
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/poetry.lock'
+      - 'backend/pyproject.toml'
+      - 'frontend/package.json'
+      - 'frontend/package-lock.json'
+      - 'ai/poetry.lock'
+      - 'ai/pyproject.toml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v3
+        with:
+          fail-on-severity: high
+          deny-licenses: 'GPL-1.0, LGPL-2.0'
+
+      - name: Python Dependency Check
+        uses: pypa/gh-action-pip-audit@v1.0.8
+        with:
+          inputs: |
+            backend/requirements.txt
+            ai/requirements.txt
+
+      - name: Node.js Dependency Check
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high 
