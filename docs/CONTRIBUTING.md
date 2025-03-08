@@ -1,191 +1,153 @@
 # Contributing to 8thDegree
 
-Thank you for your interest in contributing to 8thDegree! This document provides guidelines and instructions for contributing to the project.
+## Contributor Tiers
 
-## Code of Conduct
+### 🔹 Trusted Collaborators
+- Full repository access
+- Can approve PRs
+- Direct commit access to development branches
+- Requirements:
+  - Proven expertise
+  - 3+ accepted PRs
+  - Active participation
+  - Signed CLA
+  - 2FA enabled
 
-By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+### 🟢 General Contributors
+- Can submit PRs
+- Need approval for changes
+- Requirements:
+  - Signed CLA
+  - 2FA enabled
+  - Issue discussion first
 
-## Development Setup
+### 🔴 First-Time Contributors
+- Can submit issues
+- Can participate in discussions
+- Need to sign CLA before PR
+- Must enable 2FA
 
+## Getting Started
+
+### 1. Before Contributing
+- Read our [Code of Conduct](CODE_OF_CONDUCT.md)
+- Sign the [CLA](CLA.md)
+- Enable 2FA on your GitHub account
+- Join our [Discord community](https://discord.gg/8thdegree)
+
+### 2. Issue First Policy
+1. Search existing issues
+2. Create a new issue if none exists
+3. Discuss implementation approach
+4. Get approval before starting work
+
+### 3. Development Process
 1. Fork the repository
-2. Clone your fork:
-   ```bash
-   git clone https://github.com/your-username/8thDegree.git
-   cd 8thDegree
-   ```
-3. Set up the development environment:
-   ```bash
-   # Copy environment files
-   cp frontend/.env.local.example frontend/.env.local
-   cp backend/.env.example backend/.env
+2. Create a feature branch
+3. Write tests
+4. Update documentation
+5. Submit PR
 
-   # Install dependencies
-   cd frontend && npm install
-   cd ../backend && pip install -r requirements.txt
+## Pull Request Process
 
-   # Start the development environment
-   docker-compose up --build
-   ```
+### 1. Preparation
+- Update documentation
+- Add tests
+- Follow style guide
+- Update changelog
 
-## Development Process
+### 2. Submission
+- Reference related issues
+- Describe changes
+- Include test results
+- Add "Signed-off-by" line
 
-We use GitHub to host code, track issues and feature requests, and accept pull requests.
+### 3. Review Process
+- Automated checks
+- Code review
+- Security review
+- Documentation review
 
-1. Create a new branch from `main` following our naming convention
-2. Make your changes following our style guide
-3. Add or update tests as needed
-4. Ensure all tests pass
-5. Update documentation
-6. Submit a pull request
+## Development Guidelines
 
-## Branch Naming Convention
+### Code Style
+- Follow language-specific guides
+- Use provided linters
+- Write clear comments
+- Keep functions small
 
-- Feature branches: `feature/description`
-- Bug fix branches: `fix/description`
-- Documentation branches: `docs/description`
-- Release branches: `release/version`
-- Hotfix branches: `hotfix/description`
+### Testing
+- Write unit tests
+- Add integration tests
+- Test edge cases
+- Update test documentation
 
-## Commit Message Format
+### Documentation
+- Update relevant docs
+- Add inline comments
+- Update API documentation
+- Include examples
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+## Security Guidelines
 
-```
-<type>(<scope>): <description>
+### Code Security
+- No secrets in code
+- Input validation
+- Output sanitization
+- Error handling
 
-[optional body]
+### Data Protection
+- Use encryption
+- Validate inputs
+- Protect user data
+- Follow GDPR rules
 
-[optional footer]
-```
+## Community Guidelines
 
-Types:
-- feat: A new feature
-- fix: A bug fix
-- docs: Documentation only changes
-- style: Changes that do not affect the meaning of the code
-- refactor: A code change that neither fixes a bug nor adds a feature
-- perf: A code change that improves performance
-- test: Adding missing tests
-- chore: Changes to the build process or auxiliary tools
+### Communication
+- Be respectful
+- Stay on topic
+- Help others
+- Share knowledge
 
-## Pull Request Guidelines
+### Issue Discussions
+- Provide context
+- Include examples
+- Be specific
+- Follow templates
 
-- Use clear, descriptive commit messages
-- Include tests for new features
-- Update documentation as needed
-- Follow the existing code style
-- Keep PRs focused and manageable
-- Ensure all automated checks pass
-- Include relevant test cases
-- Update the CHANGELOG.md
+## Recognition Program
 
-## Project Structure
+### Points System
+- Issue creation: 1 point
+- PR submission: 2 points
+- PR accepted: 5 points
+- Documentation: 3 points
 
-```
-8thDegree/
-├── backend/           # FastAPI backend
-│   ├── fairgig/      # Main application package
-│   ├── tests/        # Backend tests
-│   └── Dockerfile    # Backend container
-├── frontend/         # Next.js frontend
-│   ├── src/         # Source code
-│   │   ├── app/     # Next.js app router
-│   │   ├── components/ # React components
-│   │   ├── lib/     # Utility functions
-│   │   └── styles/  # Global styles
-│   ├── public/      # Static files
-│   └── Dockerfile   # Frontend container
-├── docs/            # Documentation
-└── docker-compose.yml
-```
+### Badges
+- 🌟 Rising Star (10 points)
+- 🥈 Silver Contributor (25 points)
+- 🥇 Gold Contributor (50 points)
+- 💎 Diamond Contributor (100 points)
 
-## Code Style
+## Additional Resources
 
-- TypeScript: Follow ESLint and existing code style
-- Python: Follow PEP 8 guidelines
-- Use Prettier for frontend code formatting
-- Follow React best practices and hooks rules
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Maintain consistent component structure
-- Follow accessibility best practices
-- Optimize imports and remove unused code
+### Documentation
+- [API Documentation](api/README.md)
+- [Architecture Guide](architecture/README.md)
+- [Security Policy](security/README.md)
 
-## Testing
+### Tools
+- Linters
+- Test frameworks
+- Development tools
+- CI/CD pipelines
 
-- Write unit tests for new features
-- Update existing tests when modifying features
-- Include integration tests for API endpoints
-- Test across different browsers and devices
-- Include mobile responsive testing
-- Test for accessibility compliance
-- Include edge cases in test coverage
-- Ensure all tests pass before submitting PR
+### Support
+- GitHub Discussions
+- Discord community
+- Stack Overflow tag
+- Email support
 
-## Documentation
-
-- Update relevant documentation files
-- Document new environment variables
-- Keep API documentation up to date
-- Add JSDoc comments for TypeScript functions
-- Include usage examples for new features
-- Document any breaking changes
-- Update component props documentation
-- Maintain architecture documentation
-
-## Issue Reporting
-
-### Bug Reports
-
-Include the following information:
-
-1. Node.js and Python versions
-2. Operating system
-3. Steps to reproduce
-4. Expected behavior
-5. Actual behavior
-6. Error messages or screenshots
-7. Relevant configuration files
-
-### Feature Requests
-
-Provide the following details:
-
-1. Clear description of the feature
-2. Use cases and benefits
-3. Potential implementation approach
-4. Relevant examples
-5. Impact on existing functionality
-6. Estimated complexity and scope
-
-## Security
-
-- Never commit sensitive information
-- Report security vulnerabilities privately
-- Follow OWASP security guidelines
-- Keep dependencies up to date
-- Use environment variables for secrets
-- Follow secure coding practices
-- Implement proper input validation
-- Use secure authentication methods
-
-## Release Process
-
-1. Update version in `pyproject.toml` and `package.json`
-2. Update CHANGELOG.md
-3. Create a release tag
-4. Deploy to staging for testing
-5. Deploy to production after approval
-
-## Getting Help
-
-- Check existing documentation
-- Open an issue for bugs
-- Join our community discussions
-- Contact maintainers
-- Review closed issues and PRs
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the project's MIT License. 
+## Questions?
+Contact us at contribute@8thdegree.ai 
