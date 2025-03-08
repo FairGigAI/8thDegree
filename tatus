@@ -1,228 +1,0 @@
-[1mdiff --git a/backend/fairgig/__init__.py b/backend/fairgig/__init__.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/config.py b/backend/fairgig/config.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/database.py b/backend/fairgig/database.py[m
-[1mdeleted file mode 100644[m
-[1mindex d920643..0000000[m
-[1m--- a/backend/fairgig/database.py[m
-[1m+++ /dev/null[m
-[36m@@ -1,28 +0,0 @@[m
-[31m-import os[m
-[31m-from sqlalchemy import create_engine[m
-[31m-from sqlalchemy.ext.declarative import declarative_base[m
-[31m-from sqlalchemy.orm import sessionmaker[m
-[31m-from dotenv import load_dotenv[m
-[31m-[m
-[31m-# Load environment variables[m
-[31m-load_dotenv()[m
-[31m-[m
-[31m-# Database Connection URL[m
-[31m-DB_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASS')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"[m
-[31m-[m
-[31m-# Create the database engine[m
-[31m-engine = create_engine(DB_URL)[m
-[31m-[m
-[31m-# Create a session factory[m
-[31m-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)[m
-[31m-[m
-[31m-# Base class for ORM models[m
-[31m-Base = declarative_base()[m
-[31m-[m
-[31m-# Dependency to get the DB session[m
-[31m-def get_db():[m
-[31m-    db = SessionLocal()[m
-[31m-    try:[m
-[31m-        yield db[m
-[31m-    finally:[m
-[31m-        db.close()[m
-[1mdiff --git a/backend/fairgig/main.py b/backend/fairgig/main.py[m
-[1mdeleted file mode 100644[m
-[1mindex 8eb33ce..0000000[m
-[1m--- a/backend/fairgig/main.py[m
-[1m+++ /dev/null[m
-[36m@@ -1,38 +0,0 @@[m
-[31m-from fastapi import FastAPI, Depends[m
-[31m-from fastapi.staticfiles import StaticFiles[m
-[31m-from sqlalchemy.orm import Session[m
-[31m-from sqlalchemy.sql import text  # Import text() for raw SQL[m
-[31m-[m
-[31m-# Import database connection dependency[m
-[31m-from fairgig.database import get_db[m
-[31m-[m
-[31m-# Import API Routers[m
-[31m-from fairgig.routers.user import router as user_router[m
-[31m-from fairgig.routers.job import router as job_router[m
-[31m-[m
-[31m-app = FastAPI([m
-[31m-    title="FairGigAI",[m
-[31m-    description="An open-source, fair freelance marketplace",[m
-[31m-    version="0.1.0",[m
-[31m-)[m
-[31m-[m
-[31m-# Root Endpoint (Health Check)[m
-[31m-@app.get("/")[m
-[31m-def read_root():[m
-[31m-    return {"message": "FairGigAI API is running!"}[m
-[31m-[m
-[31m-# Database Connection Test[m
-[31m-@app.get("/test-db")[m
-[31m-def test_db_connection(db: Session = Depends(get_db)):[m
-[31m-    try:[m
-[31m-        db.execute(text("SELECT 1"))  # Use text() for raw SQL[m
-[31m-        return {"message": "Database connection successful!"}[m
-[31m-    except Exception as e:[m
-[31m-        return {"error": str(e)}[m
-[31m-[m
-[31m-# Include API Routers[m
-[31m-app.include_router(user_router, prefix="/user", tags=["Users"])[m
-[31m-app.include_router(job_router, prefix="/job", tags=["Jobs"])[m
-[31m-[m
-[31m-# Serve Static Files (Logo, Images, etc.)[m
-[31m-app.mount("/static", StaticFiles(directory="static"), name="static")[m
-[1mdiff --git a/backend/fairgig/models.py b/backend/fairgig/models.py[m
-[1mdeleted file mode 100644[m
-[1mindex 2d78159..0000000[m
-[1m--- a/backend/fairgig/models.py[m
-[1m+++ /dev/null[m
-[36m@@ -1,47 +0,0 @@[m
-[31m-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, func[m
-[31m-from sqlalchemy.orm import relationship[m
-[31m-from fairgig.database import Base[m
-[31m-[m
-[31m-# User Model[m
-[31m-class User(Base):[m
-[31m-    __tablename__ = "users"[m
-[31m-[m
-[31m-    id = Column(Integer, primary_key=True, index=True)[m
-[31m-    username = Column(String, unique=True, index=True, nullable=False)[m
-[31m-    email = Column(String, unique=True, index=True, nullable=False)[m
-[31m-    hashed_password = Column(String, nullable=False)[m
-[31m-    is_active = Column(Boolean, default=True)[m
-[31m-    created_at = Column(DateTime, default=func.now())[m
-[31m-[m
-[31m-# Job Model[m
-[31m-class Job(Base):[m
-[31m-    __tablename__ = "jobs"[m
-[31m-[m
-[31m-    id = Column(Integer, primary_key=True, index=True)[m
-[31m-    title = Column(String, index=True, nullable=False)[m
-[31m-    description = Column(String, nullable=False)[m
-[31m-    client_id = Column(Integer, ForeignKey("users.id"))[m
-[31m-    created_at = Column(DateTime, default=func.now())[m
-[31m-[m
-[31m-    client = relationship("User")[m
-[31m-[m
-[31m-# Votes (Upvotes/Downvotes)[m
-[31m-class Vote(Base):[m
-[31m-    __tablename__ = "votes"[m
-[31m-[m
-[31m-    id = Column(Integer, primary_key=True, index=True)[m
-[31m-    user_id = Column(Integer, ForeignKey("users.id"))[m
-[31m-    job_id = Column(Integer, ForeignKey("jobs.id"))[m
-[31m-    vote_type = Column(String, nullable=False)  # "up" or "down"[m
-[31m-    created_at = Column(DateTime, default=func.now())[m
-[31m-[m
-[31m-# Teams[m
-[31m-class Team(Base):[m
-[31m-    __tablename__ = "teams"[m
-[31m-[m
-[31m-    id = Column(Integer, primary_key=True, index=True)[m
-[31m-    name = Column(String, unique=True, nullable=False)[m
-[31m-    owner_id = Column(Integer, ForeignKey("users.id"))[m
-[31m-    created_at = Column(DateTime, default=func.now())[m
-[31m-[m
-[31m-    owner = relationship("User")[m
-[1mdiff --git a/backend/fairgig/routers/__init__.py b/backend/fairgig/routers/__init__.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/routers/job.py b/backend/fairgig/routers/job.py[m
-[1mdeleted file mode 100644[m
-[1mindex 770212c..0000000[m
-[1m--- a/backend/fairgig/routers/job.py[m
-[1m+++ /dev/null[m
-[36m@@ -1,7 +0,0 @@[m
-[31m-from fastapi import APIRouter[m
-[31m-[m
-[31m-router = APIRouter(prefix="/jobs", tags=["Jobs"])[m
-[31m-[m
-[31m-@router.get("/")[m
-[31m-def get_jobs():[m
-[31m-    return [{"id": 1, "title": "Software Developer", "company": "FairGigAI"}][m
-[1mdiff --git a/backend/fairgig/routers/user.py b/backend/fairgig/routers/user.py[m
-[1mdeleted file mode 100644[m
-[1mindex 90b2f0f..0000000[m
-[1m--- a/backend/fairgig/routers/user.py[m
-[1m+++ /dev/null[m
-[36m@@ -1,7 +0,0 @@[m
-[31m-from fastapi import APIRouter[m
-[31m-[m
-[31m-router = APIRouter(prefix="/users", tags=["Users"])[m
-[31m-[m
-[31m-@router.get("/")[m
-[31m-def get_users():[m
-[31m-    return [{"id": 1, "name": "John Doe"}][m
-[1mdiff --git a/backend/fairgig/schemas/user.py b/backend/fairgig/schemas/user.py[m
-[1mindex e69de29..54bc1e3 100644[m
-[1m--- a/backend/fairgig/schemas/user.py[m
-[1m+++ b/backend/fairgig/schemas/user.py[m
-[36m@@ -0,0 +1,42 @@[m
-[32m+[m[32mfrom pydantic import BaseModel, EmailStr[m[41m[m
-[32m+[m[32mfrom typing import Optional[m[41m[m
-[32m+[m[32mfrom datetime import datetime[m[41m[m
-[32m+[m[32mfrom fairgig.models import UserType, OAuthProvider[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32mclass UserBase(BaseModel):[m[41m[m
-[32m+[m[32m    email: EmailStr[m[41m[m
-[32m+[m[32m    full_name: str[m[41m[m
-[32m+[m[32m    user_type: UserType = UserType.CLIENT[m[41m[m
-[32m+[m[32m    bio: Optional[str] = None[m[41m[m
-[32m+[m[32m    skills: Optional[str] = None[m[41m[m
-[32m+[m[32m    hourly_rate: Optional[int] = None[m[41m[m
-[32m+[m[32m    company_name: Optional[str] = None[m[41m[m
-[32m+[m[32m    website: Optional[str] = None[m[41m[m
-[32m+[m[32m    location: Optional[str] = None[m[41m[m
-[32m+[m[32m    avatar_url: Optional[str] = None[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32mclass UserCreate(UserBase):[m[41m[m
-[32m+[m[32m    password: Optional[str] = None[m[41m[m
-[32m+[m[32m    oauth_provider: Optional[OAuthProvider] = None[m[41m[m
-[32m+[m[32m    oauth_id: Optional[str] = None[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32mclass UserUpdate(BaseModel):[m[41m[m
-[32m+[m[32m    full_name: Optional[str] = None[m[41m[m
-[32m+[m[32m    bio: Optional[str] = None[m[41m[m
-[32m+[m[32m    skills: Optional[str] = None[m[41m[m
-[32m+[m[32m    hourly_rate: Optional[int] = None[m[41m[m
-[32m+[m[32m    company_name: Optional[str] = None[m[41m[m
-[32m+[m[32m    website: Optional[str] = None[m[41m[m
-[32m+[m[32m    location: Optional[str] = None[m[41m[m
-[32m+[m[32m    avatar_url: Optional[str] = None[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32mclass UserResponse(UserBase):[m[41m[m
-[32m+[m[32m    id: int[m[41m[m
-[32m+[m[32m    is_active: bool[m[41m[m
-[32m+[m[32m    is_verified: bool[m[41m[m
-[32m+[m[32m    created_at: datetime[m[41m[m
-[32m+[m[32m    updated_at: datetime[m[41m[m
-[32m+[m[32m    oauth_provider: Optional[OAuthProvider] = None[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m    class Config:[m[41m[m
-[32m+[m[32m        from_attributes = True[m[41m[m
-[1mdiff --git a/backend/fairgig/services/__init__.py b/backend/fairgig/services/__init__.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/services/auth.py b/backend/fairgig/services/auth.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/tests/__init__.py b/backend/fairgig/tests/__init__.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/utils/__init__.py b/backend/fairgig/utils/__init__.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
-[1mdiff --git a/backend/fairgig/utils/security.py b/backend/fairgig/utils/security.py[m
-[1mdeleted file mode 100644[m
-[1mindex e69de29..0000000[m
