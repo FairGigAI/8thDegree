@@ -105,7 +105,7 @@ Full documentation is available in the [8thDegree-docs](https://github.com/FairG
 Example implementations can be found in the [8thDegree-examples](https://github.com/FairGigAI/8thDegree-examples) repository.
 
 ## License
-This project is licensed under the terms of the [MIT License](LICENSE).
+See Licesning 
 
 ## Support
 For support, please:
