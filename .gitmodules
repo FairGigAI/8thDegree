@@ -1,3 +1,6 @@
 [submodule "ai"]
 	path = ai
 	url = https://github.com/FairGigAI/8thdegree-ai.git
+[submodule "preview"]
+	path = preview
+	url = https://github.com/FairGigAI/8thdegree-preview.git
