@@ -3,35 +3,18 @@
 ## Overview
 8thDegree is a next-generation freelancing platform that uses AI to provide fair, real-time matching between clients and freelancers. Our platform focuses on creating equal opportunities while maintaining high-quality service delivery.
 
-## Documentation Structure
+## Repository Structure
 
-### Architecture
-- [Backend Architecture](docs/architecture/backend.md)
-- [Frontend Architecture](docs/architecture/frontend.md)
-- [AI Architecture](docs/architecture/ai.md)
-- [System Overview](docs/architecture/overview.md)
+### Public Repositories
+- [8thDegree](https://github.com/FairGigAI/8thDegree) - Main repository (Frontend)
+- [8thDegree-docs](https://github.com/FairGigAI/8thDegree-docs) - Documentation
+- [8thDegree-examples](https://github.com/FairGigAI/8thDegree-examples) - Example implementations
+- [8thdegree-preview](https://github.com/FairGigAI/8thdegree-preview) - Preview site
 
-### API Documentation
-- [Backend API](docs/api/backend.md)
-- [Frontend API](docs/api/frontend.md)
-- [AI Service API](docs/api/ai.md)
-
-### Development
-- [Getting Started](docs/development/getting-started.md)
-- [Style Guide](docs/development/style-guide.md)
-- [Workflow](docs/development/workflow.md)
-- [AI Implementation](docs/development/ai-implementation.md)
-
-### Security
-- [Best Practices](docs/security/best-practices.md)
-- [Privacy Policy](docs/security/privacy.md)
-- [Guidelines](docs/security/guidelines.md)
-
-### Project Guidelines
-- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
-- [Contributing](docs/CONTRIBUTING.md)
-- [License](docs/LICENSE.md)
-- [CLA](docs/CLA.md)
+### Private Repositories
+- 8thDegree-core - Backend services
+- 8thdegree-ai - AI services
+- 8thDegree-infra - Infrastructure configuration
 
 ## Core Features
 
@@ -61,115 +44,71 @@
 
 ## Architecture
 
-### AI Layer
-- OpenAI embeddings
-- Real-time matching
-- Bias detection
-- Learning system
-
-### Backend
-- FastAPI
-- PostgreSQL
-- Redis
-- Elasticsearch
-
-### Frontend
+### Frontend (This Repository)
 - Next.js 14
 - React
 - Tailwind CSS
 - Shadcn/ui
 
-## Tech Stack
-
-### AI & ML
-- OpenAI API
-- TensorFlow
-- PyTorch
-- scikit-learn
-
-### Backend
-- Python 3.11
+### Backend (Private)
 - FastAPI
-- SQLAlchemy
-- Alembic
+- PostgreSQL
+- Redis
+- Elasticsearch
 
-### Frontend
-- TypeScript
-- Next.js 14
-- Prisma
-- TailwindCSS
-
-## Project Structure
-```
-8thDegree/
-├── backend/           # FastAPI backend
-│   ├── app/          # Main application
-│   └── tests/        # Backend tests
-├── frontend/         # Next.js frontend
-│   ├── src/         # Source code
-│   └── tests/       # Frontend tests
-├── ai/              # AI service
-│   ├── app/         # AI application
-│   └── tests/       # AI tests
-├── docs/            # Documentation
-└── preview/         # Preview service
-```
-```
-docs/
-├── api/                    # API Documentation
-├── architecture/          # Architecture Documentation
-├── development/          # Development Documentation
-├── security/             # Security Documentation
-└── preview/             # Preview Service Documentation
-```
+### AI Services (Private)
+- OpenAI embeddings
+- Real-time matching
+- Bias detection
+- Learning system
 
 ## Getting Started
 
 ### Prerequisites
-- Python 3.11+
 - Node.js 18+
-- PostgreSQL 15+
-- Redis 7+
+- npm or yarn
+- Git
 
 ### Installation
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/8thDegree.git
+git clone https://github.com/FairGigAI/8thDegree.git
 cd 8thDegree
 ```
 
-2. Install backend dependencies
+2. Install dependencies
 ```bash
-cd backend
-poetry install
-```
-
-3. Install frontend dependencies
-```bash
-cd frontend
 npm install
+# or
+yarn install
 ```
 
-4. Set up environment variables
+3. Set up environment variables
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-5. Start development servers
+4. Start the development server
 ```bash
-# Backend
-poetry run uvicorn app.main:app --reload
-
-# Frontend
 npm run dev
+# or
+yarn dev
 ```
 
 ## Contributing
-Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) and [Code of Conduct](docs/CODE_OF_CONDUCT.md) before submitting contributions.
+Please read our [Contributing Guidelines](https://github.com/FairGigAI/8thDegree-docs/blob/main/CONTRIBUTING.md) and [Code of Conduct](https://github.com/FairGigAI/8thDegree-docs/blob/main/CODE_OF_CONDUCT.md) before submitting contributions.
+
+## Documentation
+Full documentation is available in the [8thDegree-docs](https://github.com/FairGigAI/8thDegree-docs) repository.
+
+## Examples
+Example implementations can be found in the [8thDegree-examples](https://github.com/FairGigAI/8thDegree-examples) repository.
 
 ## License
-This project is licensed under the terms of the [MIT License](docs/LICENSE.md).
+This project is licensed under the terms of the [MIT License](LICENSE).
 
 ## Support
-For support, please open an issue or contact our team at support@8thdegree.ai.
-
+For support, please:
+1. Check our [Documentation](https://github.com/FairGigAI/8thDegree-docs)
+2. Open an issue in the appropriate repository
+3. Contact us at support@8thdegree.ai
