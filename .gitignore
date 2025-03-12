@@ -227,3 +227,7 @@ frontend/.env.local
 sendgrid.env
 
 
+private-ai-setup/
+cursorcontext.md
+implementationplan.md
+init.sh

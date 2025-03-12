@@ -2,29 +2,29 @@ ini
 [submodule "backend"]
     path = backend
     url = https://github.com/FairGigAI/8thDegree-core.git
-    branch = main
+    branch = dev
 
 [submodule "ai"]
     path = ai
     url = https://github.com/FairGigAI/8thdegree-ai.git
-    branch = main
+    branch = dev
 
 [submodule "docs"]
 	path = docs
 	url = https://github.com/FairGigAI/8thDegree-docs.git
-    branch = main
+    branch = dev
 
 [submodule "examples"]
 	path = examples
 	url = https://github.com/FairGigAI/8thDegree-examples.git
-    branch = main
+    branch = dev
 
 [submodule "preview"]
     path = preview
     url = https://github.com/FairGigAI/8thdegree-preview.git
-    branch = main
+    branch = dev
 
 [submodule "infra"]
 	path = infra
 	url = https://github.com/FairGigAI/8thDegree-infra.git
-    branch = main
+    branch = dev
