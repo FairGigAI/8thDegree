@@ -1,8 +1,8 @@
 ini
 [submodule "backend"]
-    path = backend
-    url = https://github.com/FairGigAI/8thDegree-core.git
-    branch = dev
+	path = backend
+	url = https://github.com/FairGigAI/8thDegree-core.git
+	branch = dev
 
 [submodule "ai"]
     path = ai
