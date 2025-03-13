@@ -3,6 +3,9 @@
 ## Overview
 8thDegree is a next-generation freelancing platform that uses AI to provide fair, real-time matching between clients and freelancers. Our platform focuses on creating equal opportunities while maintaining high-quality service delivery.
 
+![Screenshot 2025-03-13 182546](https://github.com/user-attachments/assets/976f7561-39f0-4420-ab07-4eecd3f7307d)
+
+
 ## Repository Structure
 
 ### Public Repositories
@@ -41,6 +44,9 @@
 - Distributed AI processing
 - Cross-region optimization
 - Global talent pool
+
+![Screenshot 2025-03-13 182809](https://github.com/user-attachments/assets/c40e0324-a08f-4816-9f3e-6e1d864539aa)
+
 
 ## Architecture
 
