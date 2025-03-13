@@ -45,6 +45,9 @@
 - Cross-region optimization
 - Global talent pool
 
+![Screenshot 2025-03-13 182809](https://github.com/user-attachments/assets/c40e0324-a08f-4816-9f3e-6e1d864539aa)
+
+
 ## Architecture
 
 ### Frontend (This Repository)
